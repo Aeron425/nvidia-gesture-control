@@ -15,11 +15,14 @@ app = Flask(__name__)
 # =========================
 # MODEL
 # =========================
-model = joblib.load("gesture_keypoint_model.pkl")
+import os
 
-with open("keypoint_classes.json", "r") as f:
+BASE_DIR = "/home/nvidia1/nvidia-gesture-control"
+
+model = joblib.load(os.path.join(BASE_DIR, "models/gesture_keypoint_model.pkl"))
+
+with open(os.path.join(BASE_DIR, "data/keypoint_classes.json"), "r") as f:
     class_names = json.load(f)
-
 # =========================
 # CAMERA
 # =========================
