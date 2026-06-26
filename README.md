@@ -60,7 +60,7 @@ http://localhost(replace):5000
 
 Video Link:
 
-[https://drive.google.com/file/d/1cLPy6OSDYcsNjUmpeHvljhL3twY8h7JX/view?usp=sharing](video)
+[video](https://drive.google.com/file/d/1cLPy6OSDYcsNjUmpeHvljhL3twY8h7JX/view?usp=sharing)
 
 
 
