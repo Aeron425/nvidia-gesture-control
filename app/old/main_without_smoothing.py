@@ -7,9 +7,6 @@ import time
 from flask import Flask, Response, render_template_string
 from collections import deque
 
-cv2.setUseOptimized(True)
-cv2.setNumThreads(4)
-
 # =========================
 # APP
 # =========================
@@ -40,9 +37,7 @@ cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 # =========================
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
-    static_image_mode=False,
     max_num_hands=1,
-    model_complexity=0,
     min_detection_confidence=0.6,
     min_tracking_confidence=0.6
 )
@@ -82,10 +77,8 @@ def detect_swipe():
 def extract(frame):
     global hand_present
 
-    frame.flags.writeable = False
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = hands.process(rgb)
-    frame.flags.writeable = True
 
     if not res.multi_hand_landmarks:
         hand_present = False
@@ -144,9 +137,9 @@ def index():
 # STREAM
 # =========================
 def gen():
-    global fps, last_time, buffer, current_action, frame_count, last_prediction
+    global fps, last_time, buffer, current_action
 
-    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 65]
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 80]
 
     while True:
 
@@ -155,7 +148,7 @@ def gen():
             continue
 
         frame = cv2.flip(frame, 1)
-        
+        frame = cv2.resize(frame, (640, 480))
 
         features = extract(frame)
 
@@ -169,8 +162,6 @@ def gen():
             wrist_history.clear()
             gesture = "None"
             current_action = "NONE"
-            frame_count = 0
-            last_prediction = "None"
 
         else:
 
@@ -181,10 +172,8 @@ def gen():
                 buffer.append(gesture)
             else:
                 if features is not None:
-                    frame_count += 1
-                    if frame_count % 2 == 0:
-                        last_prediction = normalize(model.predict(features)[0])
-                    buffer.append(last_prediction)
+                    pred = normalize(model.predict(features)[0])
+                    buffer.append(pred)
                 else:
                     buffer.append("None")
 
@@ -249,3 +238,4 @@ def video_feed():
 if __name__ == "__main__":
     print("Stable Gesture Debug Build Running")
     app.run(host="0.0.0.0", port=5000, debug=False)
+the video is a bit laggy can you smooth it out 
