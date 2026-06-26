@@ -238,4 +238,3 @@ def video_feed():
 if __name__ == "__main__":
     print("Stable Gesture Debug Build Running")
     app.run(host="0.0.0.0", port=5000, debug=False)
-the video is a bit laggy can you smooth it out 
