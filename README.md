@@ -38,6 +38,10 @@ Detected gestures are mapped to UI actions:
   - Detected gesture
   - Current action
   - FPS counter
+ 
+Video Link:
+
+[video][(https://youtu.be/_4fd6zi6N4M](url))
 
 ---
 
@@ -58,9 +62,7 @@ Run Application & Open Link:
 python3 app/main.py
 http://localhost(replace):5000
 
-Video Link:
 
-[video][(https://youtu.be/_4fd6zi6N4M](url))
 
 
 
