@@ -41,7 +41,7 @@ Detected gestures are mapped to UI actions:
  
 Video Link:
 
-[video][(https://youtu.be/_4fd6zi6N4M](url))
+[video](https://github.com/Aeron425/nvidia-gesture-control/blob/main/url)
 
 ---
 
